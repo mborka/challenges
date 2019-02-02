@@ -28,8 +28,8 @@ def intro():
 	__________________________________
 	MBorka´s;
 	Roman - Arabic numberal converter
-		𐌎 Type exit to leave program
-		𐌎 Type ether a roman or arabic
+		- Type exit to leave program
+		- Type ether a roman or arabic
 			number to get it converted
 			to the other numeral system
 	""")
@@ -50,19 +50,9 @@ def roman_convert(string):
 		if loc[i] < loc[i+1] and loc[i] != loc[i+1]:
 			loc[i+1] = loc[i+1]-loc[i]
 			loc[i] = 0
-	print (sum(numbers = loc))
+	print ((string) + " |    " + str(sum(numbers = loc)))
 	print ("")
 
-def go(input):
-	if input.lower() == "exit":
-		exit()
-		return;
-	if input.isalpha() == True:
-		roman_convert(string = input)
-		return;
-	if input.isalpha() != True:
-		arab_roman(string = value)
-		return;
 
 def arab_roman(value):
 	list_1 = list(value)
@@ -74,10 +64,9 @@ def arab_roman(value):
 def arab_rom_single(number, table, lg):
     x = (number / (10**lg))
     values = ["-",table[0]*1,table[0]*2,table[0]*3,
-    table[0] + table[1],table[1],table[1] + table[0]*1,
-    table[1] + table[0]*2,table[1] + table[0]*3,table[0] + table[2],]
+    table[1] + table[0],table[1],table[0]*1 + table[1],
+    table[0]*2+ table[1],table[0]*3+ table[1],table[2] + table[0],]
     return values[int(x)]
-
 
 def parameters_rom(place):
     if place == 0:
@@ -89,14 +78,12 @@ def parameters_rom(place):
 
 def arab_roman(value):
 	list_1 = list(value[::-1])
-	print (list_1)
 	rearrange = []
 	splited = []
 	for i in range(len(list_1)):rearrange.append((int(list_1[i]) * (10**(i))))
-	print (rearrange)
 	for i in range(len(rearrange)):splited.append(arab_rom_single(number = rearrange[i], table = parameters_rom(i), lg = i))
-	print (splited)
-	print (cleaner(splited))
+	print (str(value) + " |    " + cleaner(splited))
+	print ("")
 
 def cleaner(unclean):
     clean = ""
@@ -107,7 +94,18 @@ def cleaner(unclean):
             clean += unclean[i]
     return clean[::-1]
 
+
+def go(input):
+	if input.lower() == "exit":
+		exit()
+	if input.isalpha() == True:
+		roman_convert(string = input)
+	else:
+		arab_roman(value = input)
+
 intro()
+global mode
+mode = 1
 while 1==1:
-	 inp = input("Roman numerals: ")
-	 go(input = inp)
+	inp = input("Enter : ")
+	go(input = inp)
